@@ -3,3 +3,5 @@ geopandas
 openpyxl
 utm
 shapely
+pyproj
+pydeck
