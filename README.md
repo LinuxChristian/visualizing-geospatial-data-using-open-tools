@@ -23,3 +23,8 @@ pip install -r requirements.txt
 ## Datasets
 
 All examples are based on data from the Danish Energy Agency. The data shows Wind turbine data from Denmark (on- and offshore). The data is available on the agencies [website](https://ens.dk/service/statistik-data-noegletal-og-kort/download-gis-filer).
+
+## Examples build using Deck.gl and the `HighCode` path
+
+- [Carbon planet](https://carbon-planet.nextgengeo.com/): Find the largest carbon emitters across the globe from multiple national/regional sources.
+- [Orphan wells](https://orphan-wells.nextgengeo.com/): Find the location of known orphan wells in the US.
