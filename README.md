@@ -24,6 +24,8 @@ pip install -r requirements.txt
 
 All examples are based on data from the Danish Energy Agency. The data shows Wind turbine data from Denmark (on- and offshore). The data is available on the agencies [website](https://ens.dk/service/statistik-data-noegletal-og-kort/download-gis-filer).
 
+Automatic identification system (AIS) data for ships within Danish waters from the [Danish Maritime Authority](https://dma.dk/safety-at-sea/navigational-information/ais-data).
+
 ## Examples build using Deck.gl and the `HighCode` path
 
 - [Carbon planet](https://carbon-planet.nextgengeo.com/): Find the largest carbon emitters across the globe from multiple national/regional sources.
