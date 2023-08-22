@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <title>Danish wind turbine locations</title>
+
+    <script src="https://unpkg.com/deck.gl@^8.0.0/dist.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js"></script>
+
+    <style type="text/css">
+      body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+      }
+
+      #control-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        margin: 12px;
+        padding: 20px;
+        font-size: 12px;
+        line-height: 1.5;
+        z-index: 1;
+        background: #fff;
+        font-family: Helvetica, Arial, sans-serif;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+      }
+
+      label {
+        display: inline-block;
+        width: 140px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="control-panel">
+      <h2>Danish wind turbine locations</h2>
+      <p>This map shows the location of Offshore wind turbines around Denmark.</p>
+      <p>Based on data from,
+          <ul>
+              <li>
+                  <a href="https://ens.dk/service/statistik-data-noegletal-og-kort/download-gis-filer">The Danish Energy Agency</a>
+              </li>
+          </ul>
+      </p>
+      <p>Get the code - It's <a href="https://github.com/LinuxChristian/visualizing-geospatial-data-using-open-tools/tree/main/HighCode">open source</a></p>
+    </div>
+  </body>
+
+  <script type="text/javascript">
+    const {DeckGL, MapView, ScatterplotLayer} = deck;
+ 
+    // NOTE: For local testing change this to a full url. E.g. http://127.0.0.1:8000/large-facilities.json
+    const DATA_URL = 'http://127.0.0.1:8000/offshore_turbines.json'
+
+    const COLOR_RANGE = [
+      [1, 152, 189],
+      [73, 227, 206],
+      [216, 254, 181],
+      [254, 237, 177],
+      [254, 173, 84],
+      [209, 55, 78]
+    ];
+
+    function getColor (object) {
+        // Returns a color value from the COLOR_RANGE variable above.
+        return COLOR_RANGE[Math.min(Math.floor(object['Kapacitet_'] / 3000), 5)];
+    }
+
+    const mapView = new MapView();
+    const deckMap = new DeckGL({
+      mapStyle: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+      views: [mapView],
+        initialViewState: {
+        longitude: 11.097,
+        latitude: 56.063,
+        zoom: 6,
+        maxZoom: 15,
+        minZoom: 2,
+        pitch: 0
+      },
+        controller: true,
+		layers: [
+		new ScatterplotLayer({
+                    id: 'scatterplot-layer',
+                    data: DATA_URL,
+                    pickable: true,
+                    stroked: true,
+		    filled: true,
+		    getPosition: d => [d.lng, d.lat],
+		    getFillColor: d => getColor(d),
+		    getLineColor: d => getColor(d),
+                    lineWidthMinPixels: 6,
+                    lineWidthMaxPixels: 350,
+                    lineWidthScale: true,
+                    lineWidthUnits: 'pixels'
+                })
+        ],
+        getTooltip
+    });
+
+    function getTooltip({object}) {
+        if (object) {
+            return `Capacity: ${object['Kapacitet_']}
+            Diameter: ${object['Rotordiame']}`;
+
+        }
+    }
+  </script>
+</html>
