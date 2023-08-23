@@ -30,3 +30,4 @@ Automatic identification system (AIS) data for ships within Danish waters from t
 
 - [Carbon planet](https://carbon-planet.nextgengeo.com/): Find the largest carbon emitters across the globe from multiple national/regional sources.
 - [Orphan wells](https://orphan-wells.nextgengeo.com/): Find the location of known orphan wells in the US.
+- [Glacial power](https://glacial-power.nextgengeo.com/): Hydropower potential of the Greenlandic ice cap.
